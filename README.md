@@ -20,12 +20,24 @@ Two Spaces were prepared on Hugging Face: preprocess and tutor-demo. The preproc
 - Checked whether the answers were correct.
 - Depending on the quality of the answers, adjusted parameters or prompts in tutor-demo.
 
-In this experiment, I generated chunks and embeddings directly in Google Colab and uploaded them to a Hugging Face Dataset. 
-The preprocess Space was not strictly necessary for this workflow, though it could be useful in the future as a more automated way to upload new chapters or additional materials.
-
 
 3-b. Workflow - Hugging Face version
-TBD
+
+- Opened the preprocess Space on Hugging Face.
+- Uploaded the book PDF through the UI.
+- Waited for the Space to generate chunks and embeddings automatically.
+- Confirmed that the artifacts were saved to the Hugging Face Dataset.
+- Started the tutor-demo Space and asked questions using the updated dataset.
+- Checked whether the answers were correct.
+- Depending on the quality of the answers, adjusted parameters or prompts in tutor-demo.
+
+
+3-c. System Internals
+
+- The preprocess Space extracts text from PDF pages, splits them into chunks, and generates vector embeddings using a sentence-transformer model.
+- These artifacts are stored in a Hugging Face Dataset (`chunks.jsonl` and `embeddings.npz`).  **When using Google Colab, upoload these two files directly to Hugging Face Dataset.*
+- The tutor-demo Space downloads the dataset, runs similarity search over the embeddings, and retrieves the top-k relevant chunks.
+- The retrieved chunks, together with the user query, are passed to the language model to generate an answer.
 
 
 4. Failures and Fixes
