@@ -33,10 +33,10 @@ TBD
 
 5. Lessons Learned
 
-The quality of chunks, the adjustment of TOP_K, and the choice of the model are key factors.
-The quality of answers can also be influenced by the prompt.
-Although this system is not yet accurate enough to tutor me in basic cryptography, it was still a meaningful experiment.
-It was a valuable challenge for me, especially since I had no background in RAG beforehand and worked on it with the help of ChatGPT.
+- The quality of chunks, the adjustment of TOP_K, and the choice of the model are key factors.
+- The quality of answers can also be influenced by the prompt.
+- Although this system is not yet accurate enough to tutor me in basic cryptography, it was still a meaningful experiment.
+- It was a valuable challenge for me, especially since I had no background in RAG beforehand and worked on it with the help of ChatGPT.
 
 
 6. Next Steps
