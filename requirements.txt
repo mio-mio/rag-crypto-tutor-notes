@@ -1,16 +1,19 @@
-// pre-process
-pypdf
-gradio
-sentence-transformers
-huggingface_hub
-numpy
-tqdm
+# Preprocess (PDF → chunks & embeddings)
+pypdf                # Extract text from PDF files
+gradio               # (Optional) UI for uploading PDF directly in preprocess Space
+sentence-transformers # Generate embeddings for text chunks
+huggingface_hub      # Upload artifacts (chunks.jsonl, embeddings.npz) to Hugging Face Dataset
+numpy                # Handle arrays and save embeddings to .npz
+tqdm                 # Progress bars during preprocessing
 
-//tutor-demo
-gradio
-huggingface_hub
-numpy
-sentence-transformers
-transformers
-accelerate
-scikit-learn
+
+
+# Tutor-demo (retrieval & answering)
+gradio               # Gradio UI for the Q&A demo
+huggingface_hub      # Download artifacts from the Hugging Face Dataset
+numpy                # Handle embeddings and similarity computations
+sentence-transformers # Query embeddings for retrieval
+transformers         # Language model for answer generation
+accelerate           # Efficient inference with transformers
+scikit-learn         # Cosine similarity / nearest neighbors search
+
