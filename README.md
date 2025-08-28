@@ -42,8 +42,8 @@ Two Spaces were prepared on Hugging Face: preprocess and tutor-demo. The preproc
 
 4. Failures and Fixes
 
-401 error occurred in Hugging Face Space.
-→ Fixed by adjusting the token settings and changing the Dataset from private to public.
+401 Unauthorized error occurred in Hugging Face Space.
+→ Fixed by adjusting the token name settings.
 
 Loading took more than ten minutes.
 → Mitigated by modifying the prompt contents.
