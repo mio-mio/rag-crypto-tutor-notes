@@ -1,0 +1,16 @@
+// pre-process
+pypdf
+gradio
+sentence-transformers
+huggingface_hub
+numpy
+tqdm
+
+//tutor-demo
+gradio
+huggingface_hub
+numpy
+sentence-transformers
+transformers
+accelerate
+scikit-learn
