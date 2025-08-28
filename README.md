@@ -11,6 +11,8 @@ Using RAG (Retrieval-Augmented Generation) and Hugging Face, the system is desig
 
 Two Spaces were prepared on Hugging Face: preprocess and tutor-demo. The preprocess Space generates and embeds chunks from the PDF, while the tutor-demo Space loads the dataset and answers questions.
 
+Note: Although a preprocess Space was prepared, in practice I found it more stable to run the preprocessing in Google Colab and then upload the results to the Hugging Face Dataset. This made the demo Space lighter and more reliable for testing.
+
 
 3-a. Workflow　- Google Colab version
 
