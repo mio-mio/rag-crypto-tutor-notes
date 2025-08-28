@@ -1,4 +1,4 @@
-Retrieval-Augmented Generation Tutor Project
+<B>Retrieval-Augmented Generation Tutor Project</b>
 
 1. Overview 
 
@@ -42,13 +42,25 @@ Two Spaces were prepared on Hugging Face: preprocess and tutor-demo. The preproc
 
 4. Failures and Fixes
 
+401 error occurred in Hugging Face Space.
+→ Fixed by adjusting the token settings and changing the Dataset from private to public.
+
+Loading took more than ten minutes.
+→ Mitigated by modifying the prompt contents.
+
+Answers only repeated the question again and again.
+→ Adjusted the value of TOP_K from 2 to 4.
+
+Wrong information appeared in the answers.
+→ Changed the prompt and the value of TOP_K, but it was not effective. It seems that modifying the retrieved chunks and using a stronger model are required.
+
 
 5. Lessons Learned
-
+From these failures I learned,
 - The quality of chunks, the adjustment of TOP_K, and the choice of the model are key factors.
 - The quality of answers can also be influenced by the prompt.
 - Although this system is not yet accurate enough to tutor me in basic cryptography, it was still a meaningful experiment.
-- It was a valuable challenge for me, especially since I had no background in RAG beforehand and worked on it with the help of ChatGPT.
+- It was a valuable challenge for me, especially since I had <b>no background in RAG beforehand</b> and worked on it with the help of ChatGPT.
 
 
 6. Next Steps
