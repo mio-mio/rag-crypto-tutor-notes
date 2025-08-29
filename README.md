@@ -7,7 +7,25 @@ This is a bit embarrassing, but I struggled with the Cryptography I course (http
 Using RAG (Retrieval-Augmented Generation) and Hugging Face, the system is designed to answer short questions.
 
 
-2. System Structure
+2-a. Environment
+
+- **Embedding model**: `sentence-transformers/all-MiniLM-L6-v2`  
+  A lightweight sentence transformer (~22M parameters, 384-dimensional embeddings).  
+  Used to convert both the user query and text chunks into vectors for similarity search.
+
+- **Generation model**: `TinyLlama/TinyLlama-1.1B-Chat-v1.0`  
+  A compact instruction-tuned language model (~1.1B parameters).  
+  Used to generate natural language answers based on the retrieved chunks and the user query.
+
+- **Execution environment**:  
+  - Preprocessing: Google Colab (for text extraction, chunking, and embeddings)  
+  - Hosting: Hugging Face Spaces (CPU basic, 2 vCPU / 16 GB RAM)  
+    - `preprocess` Space for generating and uploading artifacts  
+    - `tutor-demo` Space for interactive Q&A with RAG
+
+
+
+2-b. System Structure
 
 Two Spaces were prepared on Hugging Face: preprocess and tutor-demo. The preprocess Space generates and embeds chunks from the PDF, while the tutor-demo Space loads the dataset and answers questions.
 
@@ -45,21 +63,21 @@ Note: Although a preprocess Space was prepared, in practice I found it more stab
 4. Failures and Fixes
 
 401 Unauthorized error occurred in Hugging Face Space.
-→ Fixed by adjusting the token name settings.
+- Fixed by adjusting the token name settings.
 
 Loading took more than ten minutes.
-→ Mitigated by modifying the prompt contents.
+- In practice, responses that take longer than five minutes are considered too slow and typically warrant a restart (this is a practical rule of thumb). I mitigated this by making the prompt more concise.
 
 Answers only repeated the question again and again.
-→ Adjusted the value of TOP_K from 2 to 4.
+- Adjusted the value of TOP_K from 2 to 4.
 
 Wrong information appeared in the answers.
-→ Changed the prompt and the value of TOP_K, but it was not effective. It seems that modifying the retrieved chunks and using a stronger model are required.
+- Changed the prompt and the value of TOP_K, but it was not effective. It seems that modifying the retrieved chunks and using a stronger model are required.
 
 
 5. Lessons Learned
 From these failures I learned,
-- The quality of chunks, the adjustment of TOP_K, and the choice of the model are key factors.
+- The quality of chunks, the adjustment of TOP_K, and the choice of the model are key factors. In addition, controlling   max_new_tokens and setting a practical response timeout are also important for balancing accuracy and usability.
 - The quality of answers can also be influenced by the prompt.
 - Although this system is not yet accurate enough to tutor me in basic cryptography, it was still a meaningful experiment.
 - It was a valuable challenge for me, especially since I had <b>no background in RAG beforehand</b> and worked on it with the help of ChatGPT.
