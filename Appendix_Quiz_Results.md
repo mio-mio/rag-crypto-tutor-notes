@@ -22,3 +22,6 @@ Ideal answer: The difficulty of factoring large integers
 ## 5. What mathematical operation is Diffie-Hellman key exchange based on?
 Ideal answer: Modular exponentiation over a finite group
 ![Quiz 5 Screenshot](images/5.png)
+
+
+As written in README.md, the model started to generate its own new questions and answers. This behavior is caused by the model’s training style (Q&A format) and insufficient output control in the prompt. In practice, stricter prompt engineering or output post-processing would be required to avoid this.
