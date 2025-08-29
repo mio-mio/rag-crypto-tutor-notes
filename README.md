@@ -79,6 +79,7 @@ Wrong information appeared in the answers.
 From these failures I learned,
 - The quality of chunks, the adjustment of TOP_K, and the choice of the model are key factors. In addition, controlling   max_new_tokens and setting a practical response timeout are also important for balancing accuracy and usability.
 - The quality of answers can also be influenced by the prompt.
+- In several answers the model started to generate **its own new questions and answers**. This behavior is caused by the model’s training style (Q&A format) and insufficient output control in the prompt.  In practice, stricter prompt engineering or output post-processing would be required to avoid this.
 - Although this system is not yet accurate enough to tutor me in basic cryptography, it was still a meaningful experiment.
 - It was a valuable challenge for me, especially since I had <b>no background in RAG beforehand</b> and worked on it with the help of ChatGPT.
 
