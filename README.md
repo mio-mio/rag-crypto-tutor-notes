@@ -1,4 +1,4 @@
-<B>Retrieval-Augmented Generation Tutor Project</b>
+<B>Retrieval-Augmented Generation Tutor Demo</b>
 
 1. Overview 
 
