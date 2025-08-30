@@ -29,7 +29,14 @@ def load_artifacts():
     embs  = embs / norms
     return embs, chunks
 ```
-This function is for downloading dataset.  `chunks.jsonl` and `embedings.npz` must have the same amout of lines.
+
+Steps :
+1. Download artifacts (embeddings + chunks) from the Hugging Face dataset.*1
+2. Load embeddings into NumPy and chunks into JSON.*2
+3. Return them for use in retrieval.
+
+*1 `snapshot_download`is the function only in Hugging Face.
+*2 `chunks.jsonl` and `embedings.npz` must have the same amout of lines.
 
 Each text chunk in `chunks.jsonl` must correspond to exactly one embedding vector in `embeddings.npz`.  
 - `chunks.jsonl` contains the split pieces of text (one JSON line per chunk).  
@@ -38,8 +45,6 @@ Each text chunk in `chunks.jsonl` must correspond to exactly one embedding vecto
 During retrieval, the system looks up the top-k embedding indices and then fetches the corresponding text chunks by line number.  
 Therefore, the number of entries in both files must always match (1-to-1 mapping).  
 If they are misaligned, retrieval will either fail (index out of range) or return incorrect results.
-
-`snapshot_download`is the function only in Hugging Face.
 
 
 ## 2. search() ##
@@ -63,7 +68,7 @@ def search(query: str, k=TOP_K):
 ```
 This function is for searching purpose. 
 
-Process:
+Steps :
 - Embed the query with the same model as the corpus (e.g., all-MiniLM-L6-v2).
 - Compute cosine similarity between the query vector and all stored embeddings.
 - Select the top-k hits and return them along with chapter, page range, and similarity score.
@@ -110,7 +115,7 @@ Process:
 ```
 Builds the prompt and generates the model's answer.
 
-Steps:
+Steps :
 1. Collect top-k context chunks, with chapter and page info for citation.
 2. Join them into a context block, truncated if too long (MAX_INPUT_CHARS).
 3. Build a strict prompt.
@@ -122,3 +127,19 @@ kwargs stands for "keyword arguments".
 
 
 ## 4. ask() ##
+```
+def ask(query):
+    try:
+        hits = search(query, k=TOP_K)
+        answer = generate_answer(query, hits)
+        cites = "\n".join([f"- {h['chapter']} p.{h['page_start']}-{h['page_end']} (score={h['score']:.3f})" for h in hits])
+        return answer, json.dumps(hits, ensure_ascii=False, indent=2), cites
+    except Exception:
+        tb = traceback.format_exc()
+        return f"[ERROR]\n{tb}", "[]", ""
+```
+Steps :
+1. Receive the question from the user.
+2. Retrieve top-k relevant text chunks (search).
+3. Generate an answer using the chunks as context.
+4. Return the answer together with references (citations).
