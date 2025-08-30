@@ -1,5 +1,5 @@
 
-### Learning Notes on Code ###
+# Learning Notes on Code #
 
 Below are selected code excerpts from the tutor-demo project.  
 The code itself was generated with the help of ChatGPT, but I added my own comments to highlight what I understood during the process.
@@ -29,13 +29,15 @@ def load_artifacts():
     embs  = embs / norms
     return embs, chunks
 ```
-Steps :
+### Steps : ###
 1. Download artifacts (embeddings + chunks) from the Hugging Face dataset.*1
 2. Load embeddings into NumPy and chunks into JSON.*2
 3. Return them for use in retrieval.
 
+
+### Notes: ###
 *1 `snapshot_download`is the function only in Hugging Face.
-*2 `chunks.jsonl` and `embedings.npz` must have the same amout of lines.
+*2 `chunks.jsonl` and `embeddings.npz` must have the same number of lines.
 
 Each text chunk in `chunks.jsonl` must correspond to exactly one embedding vector in `embeddings.npz`.  
 - `chunks.jsonl` contains the split pieces of text (one JSON line per chunk).  
@@ -65,11 +67,12 @@ def search(query: str, k=TOP_K):
         })
     return results
 ```
-Steps :
-- Embed the query with the same model as the corpus (e.g., all-MiniLM-L6-v2).*1
-- Compute cosine similarity between the query vector and all stored embeddings.
-- Select the top-k hits and return them along with chapter, page range, and similarity score.
+### Steps : ###
+1. Embed the query with the same model as the corpus (e.g., all-MiniLM-L6-v2).*1
+2. Compute cosine similarity between the query vector and all stored embeddings.
+3. Select the top-k hits and return them along with chapter, page range, and similarity score.
 
+### Notes: ###
   *1 Corpus = the set of text chunks used for retrieval.
 
 
@@ -112,7 +115,7 @@ Steps :
         out_text += new_text
     return out_text
 ```
-Steps :
+### Steps : ###
 1. Collect top-k context chunks, with chapter and page info for citation.
 2. Join them into a context block, truncated if too long (MAX_INPUT_CHARS).
 3. Build a strict prompt.
@@ -135,7 +138,7 @@ def ask(query):
         tb = traceback.format_exc()
         return f"[ERROR]\n{tb}", "[]", ""
 ```
-Steps :
+### Steps : ###
 1. Receive the question from the user.
 2. Retrieve top-k relevant text chunks (search).
 3. Generate an answer using the chunks as context.
