@@ -1,4 +1,4 @@
-### Appendix: Quiz Results
+# Appendix: Quiz Results
 
 ## Summary ##
 As a result of adjusting parameters and settings, I was able to get 3 correct answers out of 5 mock questions. Here are the screenshots and my observations.
