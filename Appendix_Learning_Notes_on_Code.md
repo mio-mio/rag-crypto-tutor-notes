@@ -9,7 +9,7 @@ The code itself was generated with the help of ChatGPT, but I added my own comme
 def load_artifacts():
     root = snapshot_download(repo_id=DATASET_REPO, repo_type="dataset",
                              local_dir=ARTIFACT_LOCAL, token=TOKEN)
-    # 配置ゆらぎを吸収
+    
     cand_chunks = [os.path.join(root, "artifacts", "chunks.jsonl"),
                    os.path.join(root, "chunks.jsonl"),
                    os.path.join(ARTIFACT_LOCAL, "artifacts", "chunks.jsonl")]
@@ -24,12 +24,11 @@ def load_artifacts():
 
     chunks = [json.loads(l) for l in open(chunks_path, encoding="utf-8")]
     embs   = np.load(embs_path)["embeddings"].astype("float32")
-    # 正規化
+   
     norms = np.linalg.norm(embs, axis=1, keepdims=True) + 1e-9
     embs  = embs / norms
     return embs, chunks
 ```
-
 Steps :
 1. Download artifacts (embeddings + chunks) from the Hugging Face dataset.*1
 2. Load embeddings into NumPy and chunks into JSON.*2
@@ -66,8 +65,6 @@ def search(query: str, k=TOP_K):
         })
     return results
 ```
-This function is for searching purpose. 
-
 Steps :
 - Embed the query with the same model as the corpus (e.g., all-MiniLM-L6-v2).
 - Compute cosine similarity between the query vector and all stored embeddings.
@@ -113,8 +110,6 @@ Steps :
         out_text += new_text
     return out_text
 ```
-Builds the prompt and generates the model's answer.
-
 Steps :
 1. Collect top-k context chunks, with chapter and page info for citation.
 2. Join them into a context block, truncated if too long (MAX_INPUT_CHARS).
