@@ -1,4 +1,4 @@
-### Retrieval-Augmented Generation Tutor Demo ###
+# Retrieval-Augmented Generation Tutor Demo #
 
 ## 1. Overview ##
 
