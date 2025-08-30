@@ -66,9 +66,11 @@ def search(query: str, k=TOP_K):
     return results
 ```
 Steps :
-- Embed the query with the same model as the corpus (e.g., all-MiniLM-L6-v2).
+- Embed the query with the same model as the corpus (e.g., all-MiniLM-L6-v2).*1
 - Compute cosine similarity between the query vector and all stored embeddings.
 - Select the top-k hits and return them along with chapter, page range, and similarity score.
+
+  *1 Corpus = the set of text chunks used for retrieval.
 
 
 ## 3. generate_answer() ##
