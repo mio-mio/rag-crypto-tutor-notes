@@ -4,7 +4,7 @@
 
 This is a bit embarrassing, but I struggled with the Cryptography I course (https://www.coursera.org/learn/crypto) this year. I came up with an idea: using Large Launguage Model, I might build a personal crypto tutor just for myself.  I asked ChatGPT about its feasibility, and this report summarizes the planning, understanding, and trial-and-error process.
 
-Using RAG (Retrieval-Augmented Generation) and Hugging Face, the system is designed to answer short questions.
+This　project is a RAG system built on top of an LLM (TinyLlama) using RAG (Retrieval-Augmented Generation) and Hugging Face,  designed to answer short questions.
 
 
 ## 2-a. Environment ##
@@ -28,7 +28,6 @@ Using RAG (Retrieval-Augmented Generation) and Hugging Face, the system is desig
 ## 2-b. System Structure ##
 
 [PDF] ➝ [Preprocess (Colab or HF Space)] ➝ [Dataset: *chunks.jsonl* + *embeddings.npz*] ➝ [Tutor-demo: retrieval + answer]
-
 
 Two Spaces were prepared on Hugging Face: preprocess and tutor-demo. The preprocess Space generates and embeds chunks from the PDF, while the tutor-demo Space loads the dataset and answers questions.
 
@@ -90,3 +89,9 @@ From these failures I learned,
 ## 6. Next Steps ##
 
 When I study AI/Machine Learning in the future, I would like to try stronger models.
+
+## Appendix
+
+- [Appendix A: Learning Notes on Code](Appendix_Learning_Notes_on_Code.md)  
+- [Appendix B: Quiz Results](Appendix_Quiz_Results.md)  
+- [Appendix C: Requirements](requirements.txt)  
